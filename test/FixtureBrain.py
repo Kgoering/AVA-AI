@@ -1,7 +1,10 @@
 import unittest
 import yaml
+import sys
 
-from ..src import brain
+sys.path.append('../src')
+
+import brain
 
 
 class TestBrain(unittest.TestCase):
