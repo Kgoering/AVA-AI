@@ -22,6 +22,13 @@ class TestBrain(unittest.TestCase):
         self.assertEqual(config_data['sthost'], yaml_data['sthost'])
         self.assertEqual(config_data['port'], yaml_data['port'])
 
+    def test_load_mysql(self):
+        filename = '../config/config.yaml'
+        config_data = brain.load_config(filename)
+
+        db_conn = brain.load_mysql(config_data)
+        self.assertIsNotNone(db_conn)
+
 
 if __name__ == '__main__':
     unittest.main()
