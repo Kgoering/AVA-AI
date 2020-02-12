@@ -5,22 +5,29 @@ from skills import *
 
 # Globals
 # Apis to load
-apis = []
+api_list = []
 
 
 def load_config(filename):
-    with open(filename, 'r') as filestream:
-        yaml_data = yaml.load(filestream, Loader=yaml.FullLoader)
-        return yaml_data
+    try:
+        with open(filename, 'r') as filestream:
+            yaml_data = yaml.load(filestream, Loader=yaml.FullLoader)
+            return yaml_data
+    except FileNotFoundError:
+        print("\nNo such config file")
+        return {}
 
 
 def load_mysql(db_login):
-    db_conn = mysql.connect(
-        host=db_login['dbhost'],
-        user=db_login['user'],
-        passwd=db_login['pass'],
-        database=db_login['dtbs'])
-    return db_conn
+    try:
+        db_conn = mysql.connect(
+            host=db_login['dbhost'],
+            user=db_login['user'],
+            passwd=db_login['pass'],
+            database=db_login['dtbs'])
+        return db_conn
+    except:
+        return None
 
 
 def load_user(db_conn, username):
@@ -47,7 +54,7 @@ def load_ai(db_conn, ai_name):
         return {'name': data[0].title(), 'sex': data[1].title()}
 
 
-def load_apis():
+def load_apis(apis):
     api_dict = []
 
     for api in apis:
