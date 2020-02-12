@@ -54,6 +54,13 @@ class TestBrain(unittest.TestCase):
         self.assertEqual(ai['name'], 'ava')
         self.assertEqual(ai['sex'], 'F')
 
+    def test_load_ai_fail(self):
+        config_data = brain.load_config('../config/config.yaml')
+        db_conn = brain.load_mysql(config_data)
+
+        ai = brain.load_ai('lita')
+        self.assertIsNone(ai)
+
 
 if __name__ == '__main__':
     unittest.main()
