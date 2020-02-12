@@ -61,6 +61,10 @@ class TestBrain(unittest.TestCase):
         ai = brain.load_ai(db_conn, 'lita')
         self.assertIsNone(ai)
 
+    def test_load_apis_fail(self):
+        api_calls = brain.load_apis()
+        self.assertIsNone(api_calls)
+
 
 if __name__ == '__main__':
     unittest.main()
