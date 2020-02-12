@@ -1,4 +1,5 @@
 import yaml
+import mysql.connector as mysql
 
 
 def load_config(filename):
