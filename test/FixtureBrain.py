@@ -23,11 +23,19 @@ class TestBrain(unittest.TestCase):
         self.assertEqual(config_data['port'], yaml_data['port'])
 
     def test_load_mysql(self):
-        filename = '../config/config.yaml'
-        config_data = brain.load_config(filename)
+        config_data = brain.load_config('../config/config.yaml')
 
         db_conn = brain.load_mysql(config_data)
         self.assertIsNotNone(db_conn)
+
+    def test_load_user(self):
+        config_data = brain.load_config('../config/config.yaml')
+        db_conn = brain.load_mysql(config_data)
+
+        user, ai_name = brain.load_user(db_conn, 'kaleb')
+        self.assertIsNotNone(user)
+        self.assertEqual(user['name'], 'Kaleb')
+        self.assertEqual(ai_name, 'Ava')
 
 
 if __name__ == '__main__':
