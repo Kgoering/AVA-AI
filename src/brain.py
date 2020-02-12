@@ -1,6 +1,8 @@
 import yaml
 import mysql.connector as mysql
 
+from skills import *
+
 # Globals
 # Apis to load
 apis = []
