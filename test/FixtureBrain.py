@@ -49,7 +49,7 @@ class TestBrain(unittest.TestCase):
         config_data = brain.load_config('../config/config.yaml')
         db_conn = brain.load_mysql(config_data)
 
-        ai = brain.load_ai('ava')
+        ai = brain.load_ai(sb_conn, 'ava')
         self.assertIsNotNone(ai)
         self.assertEqual(ai['name'], 'ava')
         self.assertEqual(ai['sex'], 'F')
@@ -58,7 +58,7 @@ class TestBrain(unittest.TestCase):
         config_data = brain.load_config('../config/config.yaml')
         db_conn = brain.load_mysql(config_data)
 
-        ai = brain.load_ai('lita')
+        ai = brain.load_ai(db_conn, 'lita')
         self.assertIsNone(ai)
 
 
