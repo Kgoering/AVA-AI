@@ -28,3 +28,14 @@ def load_user(db_conn, username):
     else:
         user = {'name': data[0].title()}
         return (user, data[1].title())
+
+
+def load_ai(db_conn, ai_name):
+    cursor = db_conn.cursor()
+    cursor.execute("SELECT * FROM ais where name = '%s'" % ai_name)
+    data = cursor.fetchone()
+
+    if not data:
+        return None
+    else:
+        return {'name': data[0].title(), 'sex': data[1].title()}
