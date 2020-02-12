@@ -1,6 +1,10 @@
 import yaml
 import mysql.connector as mysql
 
+# Globals
+# Apis to load
+apis = []
+
 
 def load_config(filename):
     filestream = open(filename, 'r')
@@ -39,3 +43,13 @@ def load_ai(db_conn, ai_name):
         return None
     else:
         return {'name': data[0].title(), 'sex': data[1].title()}
+
+
+def load_apis():
+    api_dict = []
+
+    for api in apis:
+        funct, keys = api()
+        api_dict.append((funct, keys))
+
+    return api_dict
