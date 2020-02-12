@@ -8,27 +8,30 @@ import brain
 
 
 class TestBrain(unittest.TestCase):
-    def test_load_config(self):
+    def test_load_config_success(self):
         filename = '../config/config.yaml'
         config_data = brain.load_config(filename)
 
         with open(filename, 'r') as stream:
             yaml_data = yaml.load(stream, Loader=yaml.FullLoader)
 
-            self.assertEqual(config_data['user'], yaml_data['user'])
-            self.assertEqual(config_data['pass'], yaml_data['pass'])
-            self.assertEqual(config_data['dbhost'], yaml_data['dbhost'])
-            self.assertEqual(config_data['dtbs'], yaml_data['dtbs'])
-            self.assertEqual(config_data['sthost'], yaml_data['sthost'])
-            self.assertEqual(config_data['port'], yaml_data['port'])
+            self.assertEqual(yaml_data, config_data)
 
-    def test_load_mysql(self):
+    def test_load_config_fail(self):
+        config_data = brain.load_config('')
+        self.assertEqual({}, config_data)
+
+    def test_load_mysql_success(self):
         config_data = brain.load_config('../config/config.yaml')
 
         db_conn = brain.load_mysql(config_data)
         self.assertIsNotNone(db_conn)
 
         db_conn.close()
+
+    def test_load_mysql_fail(self):
+        db_conn = brain.load_mysql({})
+        self.assertIsNone(db_conn)
 
     def test_load_user_success(self):
         config_data = brain.load_config('../config/config.yaml')
@@ -71,8 +74,13 @@ class TestBrain(unittest.TestCase):
 
         db_conn.close()
 
+# @todo write a proper test
+    def test_load_apis_success(self):
+        api_calls = brain.load_apis([])
+        self.assertEqual(api_calls, [])
+
     def test_load_apis_fail(self):
-        api_calls = brain.load_apis()
+        api_calls = brain.load_apis([])
         self.assertEqual(api_calls, [])
 
 
