@@ -63,7 +63,7 @@ class TestBrain(unittest.TestCase):
 
     def test_load_apis_fail(self):
         api_calls = brain.load_apis()
-        self.assertIsNone(api_calls)
+        self.assertEqual(api_calls, [])
 
 
 if __name__ == '__main__':
