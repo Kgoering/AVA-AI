@@ -9,9 +9,9 @@ apis = []
 
 
 def load_config(filename):
-    filestream = open(filename, 'r')
-    yaml_data = yaml.load(filestream)
-    return yaml_data
+    with open(filename, 'r') as filestream:
+        yaml_data = yaml.load(filestream, Loader=yaml.FullLoader)
+        return yaml_data
 
 
 def load_mysql(db_login):
