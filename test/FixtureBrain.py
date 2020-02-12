@@ -28,7 +28,7 @@ class TestBrain(unittest.TestCase):
         db_conn = brain.load_mysql(config_data)
         self.assertIsNotNone(db_conn)
 
-    def test_load_user(self):
+    def test_load_user_success(self):
         config_data = brain.load_config('../config/config.yaml')
         db_conn = brain.load_mysql(config_data)
 
@@ -36,6 +36,14 @@ class TestBrain(unittest.TestCase):
         self.assertIsNotNone(user)
         self.assertEqual(user['name'], 'Kaleb')
         self.assertEqual(ai_name, 'Ava')
+
+    def test_load_user_fail(self):
+        config_data = brain.load_config('../config/config.yaml')
+        db_conn = brain.load_mysql(config_data)
+
+        user, ai_name = brain.load_user(db_conn, 'lita')
+        self.assertIsNone(user)
+        self.assertIsNone(ai_name)
 
 
 if __name__ == '__main__':
