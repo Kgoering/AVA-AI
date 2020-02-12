@@ -14,7 +14,3 @@ class TestWeather(unittest.TestCase):
     def test_main(self):
         ret_str = Weather.main()
         self.assertEqual(ret_str, "Weather")
-
-
-if __name__ == '__main__':
-    unittest.main()
