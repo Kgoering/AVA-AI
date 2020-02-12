@@ -1,11 +1,11 @@
 import yaml
 import mysql.connector as mysql
 
-from skills import *
+from skills import Weather
 
 # Globals
 # Apis to load
-api_list = []
+api_list = [Weather.load_api]
 
 
 def load_config(filename):
