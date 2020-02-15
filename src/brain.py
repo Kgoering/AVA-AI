@@ -62,3 +62,14 @@ def load_apis(apis):
         api_dict.append((funct, keys))
 
     return api_dict
+
+
+def load(config_file):
+    config_data = load_config(config_file)
+    db_conn = load_mysql(config_data)
+    # Ask for username
+    username = "Kaleb"
+    user, ai_name = load_user(db_conn, username)
+    ai = load_ai(db_conn, ai_name)
+    api_lookup = load_apis(api_list)
+    return (db_conn, user, ai, api_lookup)
